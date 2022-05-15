@@ -8,17 +8,19 @@ function App() {
 
   return (
     <>
-      <div class="main">
+      <div className="main">
         <Navbar brand="Rick And Morty App" />
 
         <BrowserRouter>
           <Routes>
-            <Route path="/">
-              <Characters />
+            <Route 
+             path="/"
+             element={<Characters />}>
             </Route>
 
-            <Route path="/personaje/:id">
-              <Character />
+            <Route 
+              path="/personaje/:id"
+              element={<Character />}>
             </Route>
           </Routes>
         </BrowserRouter>

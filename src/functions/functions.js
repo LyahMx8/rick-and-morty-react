@@ -1,30 +1,21 @@
-import axios from "axios";
-
-// Fetch example
-// const fetchCharacters = (url) => {
-//     fetch(url)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         setCharacters(data.results);
-//         setinfo(data.info);
-//       })
-//       .catch((error) => console.error(error));
-//   };
-
-// Axios example
-const fetchCharacters = async (url, state) => {
-  const characters = await axios.get(url);
-  state(characters.data.results);
-  state(characters.data.info);
+const fetchCharacters = async (url, characters, info) => {
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      characters(data.results);
+      info(data.info);
+    })
+    .catch((error) => console.error(error));
 };
 
 const uniqueCharacter = async (id, state) => {
-    const character = await 
-    axios.get(`https://rickandmortyapi.com/api/character/${id}`)
-    state(console.log(character))
-}
-
-export { 
-    fetchCharacters,
-    uniqueCharacter
+  fetch(`https://rickandmortyapi.com/api/character/${id}`)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data)
+      state(data);
+    })
+    .catch((error) => console.error(error));
 };
+
+export { fetchCharacters, uniqueCharacter };
