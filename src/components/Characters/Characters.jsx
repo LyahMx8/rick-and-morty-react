@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Pagination } from "./Pagination";
-import { fetchCharacters } from '../functions/functions';
+import Tilt from 'react-parallax-tilt';
+import './Characters.css';
+
+import { Pagination } from "../Pagination/Pagination";
+import { fetchCharacters } from '../../functions/services';
 
 export function Characters() {
 
@@ -22,7 +25,12 @@ export function Characters() {
   }, [initialUrl]);
 
   return (
-    <>
+    <section className="characters">
+      <div className="gizmo gizmo-top-left"></div>
+      <div className="gizmo gizmo-top-right"></div>
+      <div className="gizmo gizmo-bottom-left"></div>
+      <div className="gizmo gizmo-bottom-right"></div>
+
       <Pagination
         prev={info.prev}
         next={info.next}
@@ -32,10 +40,19 @@ export function Characters() {
 
       <main className="characters-list">
         {characters.map((item, index) => (
-          <article key={index} className="characters__detail">
+          <Tilt key={index} className="characters__detail"  
+            perspective={1000} 
+            gyroscope={true} 
+            glareEnable={true}
+            glareMaxOpacity={0.9}
+            glarePosition="all"
+            scale={1}
+            tiltMaxAngleX={13} 
+            tiltMaxAngleY={13}>
             <a href={'personaje/' + item.id}>
               <figure className="characters__detail-summary">
                 <img className="characters__detail-summary-image" src={item.image} alt={item.name} />
+                <img className="characters__detail-summary-image poped" src={item.image} alt={item.name} />
                 <figcaption className="characters__detail-summary-name">{item.name}</figcaption>
                 <figcaption className="characters__detail-summary-status">{item.status}</figcaption>
               </figure>
@@ -46,7 +63,7 @@ export function Characters() {
               <p className="characters__detail-additional-text">Specie: {item.species}</p>
               <button className="characters__detail-additional-text">Last known location: {item.location.name}</button>
             </div>
-          </article>
+          </Tilt>
         ))}
       </main>
 
@@ -56,6 +73,6 @@ export function Characters() {
         onPrevious={onPrevious}
         onNext={onNext}
       />
-    </>
+    </section>
   );
 }

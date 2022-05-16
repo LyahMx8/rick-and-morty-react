@@ -1,0 +1,13 @@
+.navbar {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+.navbar-image {
+    width: 320px;
+    transition: all .6s ease;
+}
+.navbar-image:hover {
+    -webkit-filter: drop-shadow(5px 5px 5px #01b0c8);
+    filter: drop-shadow(5px 5px 5px #01b0c8);
+}
